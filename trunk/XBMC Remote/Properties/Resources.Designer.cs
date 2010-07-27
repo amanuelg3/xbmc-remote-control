@@ -59,5 +59,68 @@ namespace XBMC_Remote.Properties {
                 resourceCulture = value;
             }
         }
+        
+        internal static System.Drawing.Bitmap gtk_media_next_rtl {
+            get {
+                object obj = ResourceManager.GetObject("gtk-media-next-rtl", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap gtk_media_next_rtl1 {
+            get {
+                object obj = ResourceManager.GetObject("gtk-media-next-rtl1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap media_record {
+            get {
+                object obj = ResourceManager.GetObject("media-record", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap media_seek_backward {
+            get {
+                object obj = ResourceManager.GetObject("media-seek-backward", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap media_seek_forward {
+            get {
+                object obj = ResourceManager.GetObject("media-seek-forward", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap media_skip_forward {
+            get {
+                object obj = ResourceManager.GetObject("media-skip-forward", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap player_end {
+            get {
+                object obj = ResourceManager.GetObject("player_end", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap player_play {
+            get {
+                object obj = ResourceManager.GetObject("player_play", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap stock_media_stop {
+            get {
+                object obj = ResourceManager.GetObject("stock_media-stop", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

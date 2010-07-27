@@ -58,6 +58,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ThreadUtils.cs" />
     <EmbeddedResource Include="MainView.resx">
       <DependentUpon>MainView.cs</DependentUpon>
     </EmbeddedResource>
@@ -81,6 +82,33 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\player_play.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\media-record.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\player_end.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\gtk-media-next-rtl.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\media-skip-forward.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\gtk-media-next-rtl1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\media-seek-backward.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\media-seek-forward.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\stock_media-stop.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
