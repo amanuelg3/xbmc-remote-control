@@ -39,3 +39,18 @@ C:\Users\Tyler\Desktop\XBMC Remote\XBMC Remote\obj\x86\Debug\ResGen.read.1.tlog
 C:\Users\Tyler\Desktop\XBMC Remote\XBMC Remote\obj\x86\Debug\ResGen.write.1.tlog
 C:\Users\Tyler\Desktop\XBMC Remote\XBMC Remote\obj\x86\Debug\XBMC_Remote.exe
 C:\Users\Tyler\Desktop\XBMC Remote\XBMC Remote\obj\x86\Debug\XBMC_Remote.pdb
+C:\Users\Tyler\Desktop\xbmc-remote-control\XBMC Remote\bin\Debug\XBMC_Remote.exe.config
+C:\Users\Tyler\Desktop\xbmc-remote-control\XBMC Remote\obj\x86\Debug\XBMC_Remote.exe
+C:\Users\Tyler\Desktop\xbmc-remote-control\XBMC Remote\obj\x86\Debug\XBMC_Remote.pdb
+C:\Users\Tyler\Desktop\xbmc-remote-control\XBMC Remote\bin\Debug\XBMC_Remote.exe
+C:\Users\Tyler\Desktop\xbmc-remote-control\XBMC Remote\bin\Debug\XBMC_Remote.pdb
+C:\Users\Tyler\Desktop\xbmc-remote-control\XBMC Remote\bin\Debug\XbmcJson.dll
+C:\Users\Tyler\Desktop\xbmc-remote-control\XBMC Remote\bin\Debug\Newtonsoft.Json.Compact.dll
+C:\Users\Tyler\Desktop\xbmc-remote-control\XBMC Remote\bin\Debug\XbmcJson.pdb
+C:\Users\Tyler\Desktop\xbmc-remote-control\XBMC Remote\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Tyler\Desktop\xbmc-remote-control\XBMC Remote\obj\x86\Debug\XBMC_Remote.MainView.resources
+C:\Users\Tyler\Desktop\xbmc-remote-control\XBMC Remote\obj\x86\Debug\XBMC_Remote.Properties.Resources.resources
+C:\Users\Tyler\Desktop\xbmc-remote-control\XBMC Remote\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Users\Tyler\Desktop\xbmc-remote-control\XBMC Remote\obj\x86\Debug\ResGen.read.1.tlog
+C:\Users\Tyler\Desktop\xbmc-remote-control\XBMC Remote\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Users\Tyler\Desktop\xbmc-remote-control\XBMC Remote\obj\x86\Debug\ResGen.write.1.tlog
