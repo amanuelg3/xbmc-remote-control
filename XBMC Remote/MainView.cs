@@ -149,6 +149,7 @@ namespace XBMC_Remote
         private void MainView_Load(object sender, EventArgs e)
         {
             Xbmc = new XbmcConnection("192.168.1.200", 80, "xbmc", "test");
+
             UpdateTimerOne.Interval = 1000;
             UpdateTimerThree.Interval = 3000;
             UpdateTimerTen.Interval = 10000;
@@ -158,12 +159,12 @@ namespace XBMC_Remote
             UpdateTimerOne.Start();
             UpdateTimerThree.Start();
             UpdateTimerTen.Start();
+
             if (Xbmc.Status.IsConnected)
             {
                 RefreshMovies();
                 RefreshTvShows();
                 RefreshMusic();
-             //  ThreadPool.QueueUserWorkItem(new WaitCallback(RefreshMusic), XbmcConnection Xbmc);
             }
 
             UpdateTimerOne.Start();
