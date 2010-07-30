@@ -36,9 +36,11 @@
             this.TBNowPlayingArtist = new System.Windows.Forms.TextBox();
             this.LblNowPlayingAlbum = new System.Windows.Forms.Label();
             this.LblNowPlayingArtist = new System.Windows.Forms.Label();
+            this.PBNowPlaying = new System.Windows.Forms.PictureBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.TabMovies = new System.Windows.Forms.TabPage();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.PBMoviesArt = new System.Windows.Forms.PictureBox();
             this.TBMoviesPlot = new System.Windows.Forms.TextBox();
             this.LblMoviesPlot = new System.Windows.Forms.Label();
             this.TBMoviesRuntime = new System.Windows.Forms.TextBox();
@@ -57,6 +59,7 @@
             this.ClmTitle = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TabTvShows = new System.Windows.Forms.TabPage();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.PBTvShowsArt = new System.Windows.Forms.PictureBox();
             this.TBTvShowsPlot = new System.Windows.Forms.TextBox();
             this.LblTvShowsPlot = new System.Windows.Forms.Label();
             this.TBTvShowsYear = new System.Windows.Forms.TextBox();
@@ -71,16 +74,16 @@
             this.TVMusic = new System.Windows.Forms.TreeView();
             this.TabFiles = new System.Windows.Forms.TabPage();
             this.GBSystem = new System.Windows.Forms.GroupBox();
+            this.TBUPT = new System.Windows.Forms.TextBox();
+            this.LBLUpTime = new System.Windows.Forms.Label();
+            this.TBBuild = new System.Windows.Forms.TextBox();
+            this.LBLBuild = new System.Windows.Forms.Label();
             this.TBResolution = new System.Windows.Forms.TextBox();
-            this.LBLResolution = new System.Windows.Forms.Label();
             this.TBFPS = new System.Windows.Forms.TextBox();
+            this.LBLResolution = new System.Windows.Forms.Label();
             this.TBFreeMemory = new System.Windows.Forms.TextBox();
             this.LBLFreeMemory = new System.Windows.Forms.Label();
             this.LBLFps = new System.Windows.Forms.Label();
-            this.LBLBuild = new System.Windows.Forms.Label();
-            this.TBBuild = new System.Windows.Forms.TextBox();
-            this.LBLUpTime = new System.Windows.Forms.Label();
-            this.TBUPT = new System.Windows.Forms.TextBox();
             this.BTNRecord = new System.Windows.Forms.Button();
             this.BTNFastForward = new System.Windows.Forms.Button();
             this.BTNRewind = new System.Windows.Forms.Button();
@@ -88,23 +91,20 @@
             this.BTNSkipPrevious = new System.Windows.Forms.Button();
             this.BTNStop = new System.Windows.Forms.Button();
             this.BTNPlayPause = new System.Windows.Forms.Button();
-            this.PBMoviesArt = new System.Windows.Forms.PictureBox();
-            this.PBTvShowsArt = new System.Windows.Forms.PictureBox();
-            this.PBNowPlaying = new System.Windows.Forms.PictureBox();
             this.GBNowPlaying.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PBNowPlaying)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.TabMovies.SuspendLayout();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PBMoviesArt)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGVMovies)).BeginInit();
             this.TabTvShows.SuspendLayout();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PBTvShowsArt)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGVTvShows)).BeginInit();
             this.TabMusic.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGVMusicPlaylist)).BeginInit();
             this.GBSystem.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.PBMoviesArt)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PBTvShowsArt)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PBNowPlaying)).BeginInit();
             this.SuspendLayout();
             // 
             // GBNowPlaying
@@ -192,11 +192,22 @@
             this.LblNowPlayingArtist.TabIndex = 1;
             this.LblNowPlayingArtist.Text = "Artist:";
             // 
+            // PBNowPlaying
+            // 
+            this.PBNowPlaying.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.PBNowPlaying.Location = new System.Drawing.Point(8, 19);
+            this.PBNowPlaying.Margin = new System.Windows.Forms.Padding(4);
+            this.PBNowPlaying.Name = "PBNowPlaying";
+            this.PBNowPlaying.Size = new System.Drawing.Size(120, 104);
+            this.PBNowPlaying.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.PBNowPlaying.TabIndex = 0;
+            this.PBNowPlaying.TabStop = false;
+            // 
             // tabControl1
             // 
+            this.tabControl1.Controls.Add(this.TabMusic);
             this.tabControl1.Controls.Add(this.TabMovies);
             this.tabControl1.Controls.Add(this.TabTvShows);
-            this.tabControl1.Controls.Add(this.TabMusic);
             this.tabControl1.Controls.Add(this.TabFiles);
             this.tabControl1.Location = new System.Drawing.Point(13, 163);
             this.tabControl1.Name = "tabControl1";
@@ -237,6 +248,15 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(424, 401);
             this.panel1.TabIndex = 1;
+            // 
+            // PBMoviesArt
+            // 
+            this.PBMoviesArt.Location = new System.Drawing.Point(291, 0);
+            this.PBMoviesArt.Name = "PBMoviesArt";
+            this.PBMoviesArt.Size = new System.Drawing.Size(133, 162);
+            this.PBMoviesArt.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.PBMoviesArt.TabIndex = 16;
+            this.PBMoviesArt.TabStop = false;
             // 
             // TBMoviesPlot
             // 
@@ -403,7 +423,7 @@
             this.TabTvShows.Padding = new System.Windows.Forms.Padding(3);
             this.TabTvShows.Size = new System.Drawing.Size(895, 401);
             this.TabTvShows.TabIndex = 1;
-            this.TabTvShows.Text = "Tv Shows";
+            this.TabTvShows.Text = "TV Shows";
             this.TabTvShows.UseVisualStyleBackColor = true;
             // 
             // panel2
@@ -419,6 +439,15 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(424, 401);
             this.panel2.TabIndex = 2;
+            // 
+            // PBTvShowsArt
+            // 
+            this.PBTvShowsArt.Location = new System.Drawing.Point(291, 0);
+            this.PBTvShowsArt.Name = "PBTvShowsArt";
+            this.PBTvShowsArt.Size = new System.Drawing.Size(133, 162);
+            this.PBTvShowsArt.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.PBTvShowsArt.TabIndex = 16;
+            this.PBTvShowsArt.TabStop = false;
             // 
             // TBTvShowsPlot
             // 
@@ -548,6 +577,7 @@
             this.TVMusic.Name = "TVMusic";
             this.TVMusic.Size = new System.Drawing.Size(440, 401);
             this.TVMusic.TabIndex = 0;
+            this.TVMusic.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.TVMusic_NodeMouseDoubleClick);
             // 
             // TabFiles
             // 
@@ -555,7 +585,7 @@
             this.TabFiles.Name = "TabFiles";
             this.TabFiles.Size = new System.Drawing.Size(895, 401);
             this.TabFiles.TabIndex = 3;
-            this.TabFiles.Text = "Files";
+            this.TabFiles.Text = "Shares";
             this.TabFiles.UseVisualStyleBackColor = true;
             // 
             // GBSystem
@@ -577,6 +607,42 @@
             this.GBSystem.TabStop = false;
             this.GBSystem.Text = "System";
             // 
+            // TBUPT
+            // 
+            this.TBUPT.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TBUPT.Location = new System.Drawing.Point(290, 45);
+            this.TBUPT.Name = "TBUPT";
+            this.TBUPT.ReadOnly = true;
+            this.TBUPT.Size = new System.Drawing.Size(90, 23);
+            this.TBUPT.TabIndex = 17;
+            // 
+            // LBLUpTime
+            // 
+            this.LBLUpTime.AutoSize = true;
+            this.LBLUpTime.Location = new System.Drawing.Point(251, 49);
+            this.LBLUpTime.Name = "LBLUpTime";
+            this.LBLUpTime.Size = new System.Drawing.Size(36, 14);
+            this.LBLUpTime.TabIndex = 16;
+            this.LBLUpTime.Text = "UPT:";
+            // 
+            // TBBuild
+            // 
+            this.TBBuild.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TBBuild.Location = new System.Drawing.Point(105, 45);
+            this.TBBuild.Name = "TBBuild";
+            this.TBBuild.ReadOnly = true;
+            this.TBBuild.Size = new System.Drawing.Size(140, 23);
+            this.TBBuild.TabIndex = 15;
+            // 
+            // LBLBuild
+            // 
+            this.LBLBuild.AutoSize = true;
+            this.LBLBuild.Location = new System.Drawing.Point(6, 49);
+            this.LBLBuild.Name = "LBLBuild";
+            this.LBLBuild.Size = new System.Drawing.Size(42, 14);
+            this.LBLBuild.TabIndex = 14;
+            this.LBLBuild.Text = "Build:";
+            // 
             // TBResolution
             // 
             this.TBResolution.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -586,15 +652,6 @@
             this.TBResolution.Size = new System.Drawing.Size(275, 23);
             this.TBResolution.TabIndex = 13;
             // 
-            // LBLResolution
-            // 
-            this.LBLResolution.AutoSize = true;
-            this.LBLResolution.Location = new System.Drawing.Point(6, 74);
-            this.LBLResolution.Name = "LBLResolution";
-            this.LBLResolution.Size = new System.Drawing.Size(78, 14);
-            this.LBLResolution.TabIndex = 12;
-            this.LBLResolution.Text = "Resolution:";
-            // 
             // TBFPS
             // 
             this.TBFPS.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -603,6 +660,15 @@
             this.TBFPS.ReadOnly = true;
             this.TBFPS.Size = new System.Drawing.Size(90, 23);
             this.TBFPS.TabIndex = 11;
+            // 
+            // LBLResolution
+            // 
+            this.LBLResolution.AutoSize = true;
+            this.LBLResolution.Location = new System.Drawing.Point(6, 74);
+            this.LBLResolution.Name = "LBLResolution";
+            this.LBLResolution.Size = new System.Drawing.Size(78, 14);
+            this.LBLResolution.TabIndex = 12;
+            this.LBLResolution.Text = "Resolution:";
             // 
             // TBFreeMemory
             // 
@@ -630,42 +696,6 @@
             this.LBLFps.Size = new System.Drawing.Size(35, 14);
             this.LBLFps.TabIndex = 0;
             this.LBLFps.Text = "FPS:";
-            // 
-            // LBLBuild
-            // 
-            this.LBLBuild.AutoSize = true;
-            this.LBLBuild.Location = new System.Drawing.Point(6, 49);
-            this.LBLBuild.Name = "LBLBuild";
-            this.LBLBuild.Size = new System.Drawing.Size(42, 14);
-            this.LBLBuild.TabIndex = 14;
-            this.LBLBuild.Text = "Build:";
-            // 
-            // TBBuild
-            // 
-            this.TBBuild.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TBBuild.Location = new System.Drawing.Point(105, 45);
-            this.TBBuild.Name = "TBBuild";
-            this.TBBuild.ReadOnly = true;
-            this.TBBuild.Size = new System.Drawing.Size(140, 23);
-            this.TBBuild.TabIndex = 15;
-            // 
-            // LBLUpTime
-            // 
-            this.LBLUpTime.AutoSize = true;
-            this.LBLUpTime.Location = new System.Drawing.Point(251, 49);
-            this.LBLUpTime.Name = "LBLUpTime";
-            this.LBLUpTime.Size = new System.Drawing.Size(36, 14);
-            this.LBLUpTime.TabIndex = 16;
-            this.LBLUpTime.Text = "UPT:";
-            // 
-            // TBUPT
-            // 
-            this.TBUPT.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TBUPT.Location = new System.Drawing.Point(290, 45);
-            this.TBUPT.Name = "TBUPT";
-            this.TBUPT.ReadOnly = true;
-            this.TBUPT.Size = new System.Drawing.Size(90, 23);
-            this.TBUPT.TabIndex = 17;
             // 
             // BTNRecord
             // 
@@ -737,35 +767,6 @@
             this.BTNPlayPause.UseVisualStyleBackColor = true;
             this.BTNPlayPause.Click += new System.EventHandler(this.BTNPlayPause_Click);
             // 
-            // PBMoviesArt
-            // 
-            this.PBMoviesArt.Location = new System.Drawing.Point(291, 0);
-            this.PBMoviesArt.Name = "PBMoviesArt";
-            this.PBMoviesArt.Size = new System.Drawing.Size(133, 162);
-            this.PBMoviesArt.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.PBMoviesArt.TabIndex = 16;
-            this.PBMoviesArt.TabStop = false;
-            // 
-            // PBTvShowsArt
-            // 
-            this.PBTvShowsArt.Location = new System.Drawing.Point(291, 0);
-            this.PBTvShowsArt.Name = "PBTvShowsArt";
-            this.PBTvShowsArt.Size = new System.Drawing.Size(133, 162);
-            this.PBTvShowsArt.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.PBTvShowsArt.TabIndex = 16;
-            this.PBTvShowsArt.TabStop = false;
-            // 
-            // PBNowPlaying
-            // 
-            this.PBNowPlaying.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.PBNowPlaying.Location = new System.Drawing.Point(8, 19);
-            this.PBNowPlaying.Margin = new System.Windows.Forms.Padding(4);
-            this.PBNowPlaying.Name = "PBNowPlaying";
-            this.PBNowPlaying.Size = new System.Drawing.Size(120, 104);
-            this.PBNowPlaying.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.PBNowPlaying.TabIndex = 0;
-            this.PBNowPlaying.TabStop = false;
-            // 
             // MainView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 14F);
@@ -789,22 +790,22 @@
             this.Load += new System.EventHandler(this.MainView_Load);
             this.GBNowPlaying.ResumeLayout(false);
             this.GBNowPlaying.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PBNowPlaying)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.TabMovies.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PBMoviesArt)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGVMovies)).EndInit();
             this.TabTvShows.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PBTvShowsArt)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGVTvShows)).EndInit();
             this.TabMusic.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.DGVMusicPlaylist)).EndInit();
             this.GBSystem.ResumeLayout(false);
             this.GBSystem.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.PBMoviesArt)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PBTvShowsArt)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PBNowPlaying)).EndInit();
             this.ResumeLayout(false);
 
         }
