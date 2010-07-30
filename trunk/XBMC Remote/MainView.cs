@@ -25,6 +25,7 @@ namespace XBMC_Remote
             if (Xbmc.AudioPlaylist.GetCurrentItem() != null)
             {
                 Song NowPlaying = Xbmc.AudioPlaylist.GetCurrentItem(new string[] {"title", "artist", "album"} );
+
                 if (NowPlaying.Title != CurrentSong)
                 {
                     CurrentSong = NowPlaying.Title;
@@ -53,7 +54,8 @@ namespace XBMC_Remote
         public void RefreshSystemStatsThree()
         {
             TBFreeMemory.Text = Xbmc.System_.GetFreeMemory();
-            TBFPS.Text = Xbmc.System_.GetFPS().ToString(); 
+            TBFPS.Text = Xbmc.System_.GetFPS().ToString();
+            RefreshAudioPlaylist();
         }
 
         public void RefreshSystemStatsTen()
@@ -93,26 +95,37 @@ namespace XBMC_Remote
             foreach (Artist ar in Xbmc.AudioLibrary.GetArtists())
             {
                 TreeNode ArtistNode = new TreeNode(ar.Label);
+                ArtistNode.Tag = ar._id;
                 TVMusic.Nodes.Add(ArtistNode);
 
                 foreach (Album al in Xbmc.AudioLibrary.GetAlbumsByArtist(ar._id))
                 {
                     TreeNode AlbumNode = new TreeNode(al.Label);
+                    AlbumNode.Tag = al._id;
                     ArtistNode.Nodes.Add(AlbumNode);
 
                     foreach (Song s in Xbmc.AudioLibrary.GetSongsByAlbum(al._id))
                     {
                         TreeNode SongNode = new TreeNode(s.Label);
+                        SongNode.Tag = s._id;
                         AlbumNode.Nodes.Add(SongNode);
                     }
                 }
             }
+        }
 
-            foreach (Song i in Xbmc.AudioPlaylist.GetItems())
+        public void RefreshAudioPlaylist()
+        {
+            if (Xbmc.Status.IsConnected)
             {
-                DataGridViewRow NewRow = new DataGridViewRow();
-                NewRow.CreateCells(DGVMovies, new object[] {i.Label});
-                DGVMusicPlaylist.Rows.Add(NewRow); 
+                DGVMusicPlaylist.Rows.Clear();
+
+                foreach (Song i in Xbmc.AudioPlaylist.GetItems())
+                {
+                    DataGridViewRow NewRow = new DataGridViewRow();
+                    NewRow.CreateCells(DGVMovies, new object[] { i.Label });
+                    DGVMusicPlaylist.Rows.Add(NewRow);
+                }
             }
         }
 
@@ -122,6 +135,7 @@ namespace XBMC_Remote
             if (Xbmc.Status.IsConnected)
             {
                 RefreshSystemStatsTen();
+                RefreshAudioPlaylist();
             }
             UpdateTimerTen.Enabled = true;
         }
@@ -226,5 +240,25 @@ namespace XBMC_Remote
         {
             Xbmc.AudioPlayer.Record();
         }
+
+        private void TVMusic_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            if (e.Node.Level == 0)
+            {
+                //Artist
+                Xbmc.Control.Play((int?)e.Node.Tag, null, null, null);
+            }
+            else if (e.Node.Level == 1)
+            {
+                //Album
+                Xbmc.Control.Play(null, (int?)e.Node.Tag, null, null);
+
+            }
+            else if (e.Node.Level == 2)
+            {
+                //Song
+                Xbmc.Control.Play(null, null, (int?)e.Node.Tag, null);
+            }
+        }        
     }
 }
