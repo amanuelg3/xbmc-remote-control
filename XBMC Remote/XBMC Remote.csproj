@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>XBMC_Remote</RootNamespace>
     <AssemblyName>XBMC_Remote</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -55,6 +55,9 @@
     </Compile>
     <Compile Include="MainView.Designer.cs">
       <DependentUpon>MainView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MyTreeView.cs">
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -22,7 +22,7 @@ namespace XBMC_Remote
 
         public void RefreshNowPlaying()
         {
-            if (Xbmc.AudioPlaylist.GetCurrentItem() != null)
+            if (Xbmc.Player.IsAudioPlayerActive())
             {
                 Song NowPlaying = Xbmc.AudioPlaylist.GetCurrentItem(new string[] {"title", "artist", "album"} );
 
@@ -32,22 +32,36 @@ namespace XBMC_Remote
                     TBNowPlayingSong.Text = NowPlaying.Title;
                     TBNowPlayingArtist.Text = NowPlaying.Artist;
                     TBNowPlayingAlbum.Text = NowPlaying.Album;
-                    PBNowPlaying.Image = Xbmc.Files.GetImageFromThumbnail(NowPlaying.Thumbnail);
+                    
                     System.Drawing.Size size = new System.Drawing.Size(32,32);
 
-                    if (PBNowPlaying.Image.Size == size)
+                    if (NowPlaying.Thumbnail == "")
                     {
                         PBNowPlaying.Image = Image.FromFile(Environment.CurrentDirectory + @"\Data\" + "music-icon.jpg");
+                    }
+                    else
+                    {
+                        PBNowPlaying.Image = Xbmc.Files.GetImageFromThumbnail(NowPlaying.Thumbnail);
                     }
                 }
 
                 TBNowPlayingRuntime.Text = Xbmc.AudioPlayer.GetTimeFormatted();
              }
 
-            if (Xbmc.VideoPlaylist.GetCurrentItem() != null)
+            if (Xbmc.Player.IsVideoPlayerActive())
             {
                 PlaylistItem NowPlaying = Xbmc.VideoPlaylist.GetCurrentItemAllFields();
-                TBNowPlayingAlbum.Text = NowPlaying.Label;
+
+                if (NowPlaying.Thumbnail == "")
+                {
+                    PBNowPlaying.Image = Image.FromFile(Environment.CurrentDirectory + @"\Data\" + "music-icon.jpg");
+                }
+                else
+                {
+                    PBNowPlaying.Image = Xbmc.Files.GetImageFromThumbnail(NowPlaying.Thumbnail);
+                }
+
+                TBNowPlayingRuntime.Text = Xbmc.VideoPlayer.GetTimeFormatted();
             }
         }
 
@@ -55,7 +69,6 @@ namespace XBMC_Remote
         {
             TBFreeMemory.Text = Xbmc.System_.GetFreeMemory();
             TBFPS.Text = Xbmc.System_.GetFPS().ToString();
-            RefreshAudioPlaylist();
         }
 
         public void RefreshSystemStatsTen()
@@ -74,19 +87,37 @@ namespace XBMC_Remote
             {
                 DataGridViewRow NewRow = new DataGridViewRow();
                 NewRow.CreateCells(DGVMovies, new object[] {m.Label});
+                NewRow.Tag = m._id;
                 DGVMovies.Rows.Add(NewRow);
             }
         }
 
         public void RefreshTvShows()
         {
-            DGVTvShows.Rows.Clear();
-
             foreach(TvShow tv in Xbmc.VideoLibrary.GetTvShows())
             {
-                DataGridViewRow NewRow = new DataGridViewRow();
-                NewRow.CreateCells(DGVMovies, new object[] {tv.Label });
-                DGVTvShows.Rows.Add(NewRow);
+                TreeNode TvShowNode = new TreeNode(tv.Label);
+                TvShowNode.Tag = tv._id;
+                TVTvShows.Nodes.Add(TvShowNode);
+
+                foreach(Season sea in Xbmc.VideoLibrary.GetSeasons(tv._id, new string[] {"season"}, null, null, null, null))
+                {
+                    TreeNode SeasonNode = new TreeNode(sea.Label);
+                    SeasonNode.Tag = sea._Season;
+                    TvShowNode.Nodes.Add(SeasonNode);
+
+                    foreach(Episode ep in Xbmc.VideoLibrary.GetEpisodes(tv._id, sea._Season, new string[] {"episodeid"}, null, null, null, null))
+                    {
+                        TreeNode EpisodeNode = new TreeNode(ep.Label);
+                        EpisodeNode.Tag = ep._id;
+                        SeasonNode.Nodes.Add(EpisodeNode);
+                    }
+                }
+            }
+
+            if (TVTvShows.Nodes.Count >= 1)
+            {
+                TVTvShows.SelectedNode = TVTvShows.Nodes[0];
             }
         }
 
@@ -135,7 +166,6 @@ namespace XBMC_Remote
             if (Xbmc.Status.IsConnected)
             {
                 RefreshSystemStatsTen();
-                RefreshAudioPlaylist();
             }
             UpdateTimerTen.Enabled = true;
         }
@@ -176,12 +206,12 @@ namespace XBMC_Remote
 
             if (Xbmc.Status.IsConnected)
             {
+              //  TBarVolume.Value = Xbmc.Control.GetVolume();
                 RefreshMovies();
-                RefreshTvShows();
-                RefreshMusic();
+               RefreshTvShows();
+               RefreshMusic();
+                RefreshAudioPlaylist();
             }
-
-            UpdateTimerOne.Start();
         }
           
         private void DGVMovies_SelectionChanged(object sender, EventArgs e)
@@ -197,43 +227,58 @@ namespace XBMC_Remote
             PBMoviesArt.Image = Xbmc.Files.GetImageFromThumbnail(m.Thumbnail);
         }
 
-        private void DGVTvShows_SelectionChanged(object sender, EventArgs e)
-        {
-            TvShow tv = Xbmc.VideoLibrary.GetTvShowsAllFields(null, null, DGVTvShows.CurrentRow.Index, DGVTvShows.CurrentRow.Index + 1)[0];
-            TBTvShowsGenre.Text = tv.Genre;
-            TBTvShowsYear.Text = tv.Year.ToString();
-            TBTvShowsPlot.Text = tv.Plot;
-            PBTvShowsArt.Image = Xbmc.Files.GetImageFromThumbnail(tv.Thumbnail);
-        }
-
         private void BTNPlayPause_Click(object sender, EventArgs e)
         {
-            Xbmc.AudioPlayer.PlayPause();
+            if(Xbmc.Player.IsAudioPlayerActive())
+                Xbmc.AudioPlayer.PlayPause();
+
+            if (Xbmc.Player.IsVideoPlayerActive())
+                Xbmc.VideoPlayer.PlayPause();
         }
 
         private void BTNStop_Click(object sender, EventArgs e)
         {
-            Xbmc.AudioPlayer.Stop();
+            if (Xbmc.Player.IsAudioPlayerActive())
+                Xbmc.AudioPlayer.Stop();
+
+            if (Xbmc.Player.IsVideoPlayerActive())
+                Xbmc.VideoPlayer.Stop();
         }
 
         private void BTNSkipPrevious_Click(object sender, EventArgs e)
         {
-            Xbmc.AudioPlayer.SkipPrevious();
+            if (Xbmc.Player.IsAudioPlayerActive())
+                Xbmc.AudioPlayer.SkipPrevious();
+
+            if (Xbmc.Player.IsVideoPlayerActive())
+                Xbmc.VideoPlayer.SkipPrevious();
         }
 
         private void BTNSkipNext_Click(object sender, EventArgs e)
         {
-            Xbmc.AudioPlayer.SkipNext();
+            if (Xbmc.Player.IsAudioPlayerActive())
+                Xbmc.AudioPlayer.SkipNext();
+
+            if (Xbmc.Player.IsVideoPlayerActive())
+                Xbmc.VideoPlayer.SkipNext();
         }
 
         private void BTNRewind_Click(object sender, EventArgs e)
         {
-            Xbmc.AudioPlayer.Rewind();
+            if (Xbmc.Player.IsAudioPlayerActive())
+                Xbmc.AudioPlayer.Rewind();
+
+            if (Xbmc.Player.IsVideoPlayerActive())
+                Xbmc.VideoPlayer.Rewind();
         }
 
         private void BTNFastForward_Click(object sender, EventArgs e)
         {
-            Xbmc.AudioPlayer.Forward();
+            if (Xbmc.Player.IsAudioPlayerActive())
+                Xbmc.AudioPlayer.Forward();
+
+            if (Xbmc.Player.IsVideoPlayerActive())
+                Xbmc.VideoPlayer.Forward();
         }
 
         private void BTNRecord_Click(object sender, EventArgs e)
@@ -246,19 +291,85 @@ namespace XBMC_Remote
             if (e.Node.Level == 0)
             {
                 //Artist
-                Xbmc.Control.Play((int?)e.Node.Tag, null, null, null);
+                Xbmc.Control.PlayArtist((int)e.Node.Tag);
             }
             else if (e.Node.Level == 1)
             {
                 //Album
-                Xbmc.Control.Play(null, (int?)e.Node.Tag, null, null);
+                Xbmc.Control.PlayAlbum((int)e.Node.Tag);
 
             }
             else if (e.Node.Level == 2)
             {
                 //Song
-                Xbmc.Control.Play(null, null, (int?)e.Node.Tag, null);
+                Xbmc.Control.PlaySong((int)e.Node.Tag);
             }
-        }        
+
+            RefreshAudioPlaylist();
+        }
+
+        private void DGVMovies_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            Xbmc.Control.PlayMovie((int)DGVMovies.CurrentRow.Tag);
+        }
+
+        private void TVTvShows_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            if (e.Node.Level == 0)
+            {
+                // Show
+                TvShow tv = Xbmc.VideoLibrary.GetTvShowsAllFields(null, null, e.Node.Index, e.Node.Index + 1)[0];
+                TBTvShowsPlot.Text = tv.Plot;
+                PBTvShowsArt.SizeMode = PictureBoxSizeMode.Zoom;
+                PBTvShowsArt.Image = Xbmc.Files.GetImageFromThumbnail(tv.Thumbnail);
+            }
+
+            if (e.Node.Level == 1)
+            {
+                //Season
+                Season sea = Xbmc.VideoLibrary.GetSeasonsAllFields((int)e.Node.Parent.Tag, null, null, e.Node.Index, e.Node.Index + 1)[0];
+
+                if (sea.Thumbnail != "")
+                {
+                    PBTvShowsArt.SizeMode = PictureBoxSizeMode.Zoom;
+                    PBTvShowsArt.Image = Xbmc.Files.GetImageFromThumbnail(sea.Thumbnail);
+                }
+                else
+                {
+                    TvShow tv = Xbmc.VideoLibrary.GetTvShows(null, null, null, e.Node.Parent.Index, e.Node.Parent.Index + 1)[0];
+                    PBTvShowsArt.SizeMode = PictureBoxSizeMode.Zoom;
+                    PBTvShowsArt.Image = Xbmc.Files.GetImageFromThumbnail(tv.Thumbnail);
+                }
+            }
+
+            if (e.Node.Level == 2)
+            {
+                //Episode
+                Episode ep = Xbmc.VideoLibrary.GetEpisodesAllFields((int)e.Node.Parent.Parent.Tag, (int)e.Node.Parent.Tag, null, null, e.Node.Index, e.Node.Index + 1)[0];
+                TBTvShowsPlot.Text = ep.Plot;
+                PBTvShowsArt.SizeMode = PictureBoxSizeMode.Zoom;
+                PBTvShowsArt.Image = Xbmc.Files.GetImageFromThumbnail(ep.Thumbnail);
+            }
+
+        }
+
+        private void TVTvShows_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            if (e.Node.Level == 2)
+            {
+                //Episode
+                Xbmc.Control.PlayEpisode((int)e.Node.Parent.Parent.Tag, (int)e.Node.Parent.Tag, (int)e.Node.Tag);
+            }
+        }
+
+        private void DGVMusicPlaylist_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            Xbmc.AudioPlaylist.Play(DGVMusicPlaylist.CurrentRow.Index);
+        }
+
+        private void TBarVolume_Scroll(object sender, EventArgs e)
+        {
+            Xbmc.Control.SetVolume(TBarVolume.Value);
+        }       
     }
 }
