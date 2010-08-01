@@ -54,3 +54,4 @@ C:\Users\Tyler\Desktop\xbmc-remote-control\XBMC Remote\obj\x86\Debug\GenerateRes
 C:\Users\Tyler\Desktop\xbmc-remote-control\XBMC Remote\obj\x86\Debug\GenerateResource.write.1.tlog
 C:\Users\Tyler\Desktop\xbmc-remote-control\XBMC Remote\obj\x86\Debug\ResGen.read.1.tlog
 C:\Users\Tyler\Desktop\xbmc-remote-control\XBMC Remote\obj\x86\Debug\ResGen.write.1.tlog
+C:\Users\Tyler\Desktop\xbmc-remote-control\XBMC Remote\obj\x86\Debug\XBMC_Remote.Settings.resources

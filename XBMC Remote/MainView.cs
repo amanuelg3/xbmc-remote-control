@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using XbmcJson;
 using System.Threading;
 using System.Drawing;
+using System.IO;
 
 namespace XBMC_Remote
 {
@@ -14,6 +15,9 @@ namespace XBMC_Remote
         System.Windows.Forms.Timer UpdateTimerThree = new System.Windows.Forms.Timer();
         System.Windows.Forms.Timer UpdateTimerTen = new System.Windows.Forms.Timer();
         string CurrentSong = "";
+        string Ip, Port, User, Password;
+        // Used to differentiate between user changing value and RefreshNowPlaying() changing value.
+        bool TrackbarSlide = false;
 
         public MainView()
         {
@@ -22,6 +26,8 @@ namespace XBMC_Remote
 
         public void RefreshNowPlaying()
         {
+            TBarVolume.Value = Xbmc.Control.GetVolume();
+
             if (Xbmc.Player.IsAudioPlayerActive())
             {
                 Song NowPlaying = Xbmc.AudioPlaylist.GetCurrentItem(new string[] {"title", "artist", "album"} );
@@ -46,9 +52,12 @@ namespace XBMC_Remote
                 }
 
                 TBNowPlayingRuntime.Text = Xbmc.AudioPlayer.GetTimeFormatted();
-             }
 
-            if (Xbmc.Player.IsVideoPlayerActive())
+                TrackbarSlide = true;
+                TBarProgress.Value = (int)Xbmc.AudioPlayer.GetPercentagePlayed();
+                TrackbarSlide = false;
+             }
+            else if (Xbmc.Player.IsVideoPlayerActive())
             {
                 PlaylistItem NowPlaying = Xbmc.VideoPlaylist.GetCurrentItemAllFields();
 
@@ -62,6 +71,9 @@ namespace XBMC_Remote
                 }
 
                 TBNowPlayingRuntime.Text = Xbmc.VideoPlayer.GetTimeFormatted();
+                TrackbarSlide = true;
+                TBarProgress.Value = (int)Xbmc.VideoPlayer.GetPercentagePlayed();
+                TrackbarSlide = false;
             }
         }
 
@@ -192,25 +204,41 @@ namespace XBMC_Remote
 
         private void MainView_Load(object sender, EventArgs e)
         {
-            Xbmc = new XbmcConnection("192.168.1.200", 80, "xbmc", "test");
-
-            UpdateTimerOne.Interval = 1000;
-            UpdateTimerThree.Interval = 3000;
-            UpdateTimerTen.Interval = 10000;
-            UpdateTimerOne.Tick += new EventHandler(UpdateTimerOne_Tick);
-            UpdateTimerThree.Tick += new EventHandler(UpdateTimerThree_Tick);
-            UpdateTimerTen.Tick += new EventHandler(UpdateTimerTen_Tick);
-            UpdateTimerOne.Start();
-            UpdateTimerThree.Start();
-            UpdateTimerTen.Start();
-
-            if (Xbmc.Status.IsConnected)
+            using (StreamReader sr = new StreamReader(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\" + "settings.ini"))
             {
-              //  TBarVolume.Value = Xbmc.Control.GetVolume();
-                RefreshMovies();
-               RefreshTvShows();
-               RefreshMusic();
-                RefreshAudioPlaylist();
+                Ip = sr.ReadLine();
+                Port = sr.ReadLine();
+                User = sr.ReadLine();
+                Password = sr.ReadLine();
+            }
+
+            if (Ip == null || Port == null)
+            {
+                Settings set = new Settings();
+                set.ShowDialog();
+            }
+            else
+            {
+                Xbmc = new XbmcConnection(Ip, Convert.ToInt32(Port), User, Password);
+
+                UpdateTimerOne.Interval = 1000;
+                UpdateTimerThree.Interval = 3000;
+                UpdateTimerTen.Interval = 10000;
+                UpdateTimerOne.Tick += new EventHandler(UpdateTimerOne_Tick);
+                UpdateTimerThree.Tick += new EventHandler(UpdateTimerThree_Tick);
+                UpdateTimerTen.Tick += new EventHandler(UpdateTimerTen_Tick);
+                UpdateTimerOne.Start();
+                UpdateTimerThree.Start();
+                UpdateTimerTen.Start();
+
+             if (Xbmc.Status.IsConnected)
+               {
+                    TBarVolume.Value = Xbmc.Control.GetVolume();
+                    RefreshMovies();
+                    RefreshTvShows();
+                    RefreshMusic();
+                    RefreshAudioPlaylist();
+               }
             }
         }
           
@@ -367,9 +395,24 @@ namespace XBMC_Remote
             Xbmc.AudioPlaylist.Play(DGVMusicPlaylist.CurrentRow.Index);
         }
 
-        private void TBarVolume_Scroll(object sender, EventArgs e)
+        private void BtnSettings_Click(object sender, EventArgs e)
+        {
+            Settings set = new Settings();
+            set.ShowDialog();
+        }
+
+        private void TBarVolume_ValueChanged(object sender, EventArgs e)
         {
             Xbmc.Control.SetVolume(TBarVolume.Value);
-        }       
+        }
+
+        private void TBarProgress_ValueChanged(object sender, EventArgs e)
+        {
+            if(!TrackbarSlide)
+            if(Xbmc.Player.IsAudioPlayerActive())
+                Xbmc.AudioPlayer.SeekPercentage(TBarProgress.Value);
+            else if (Xbmc.Player.IsVideoPlayerActive())
+                Xbmc.VideoPlayer.SeekPercentage(TBarProgress.Value);
+        }
     }
 }
