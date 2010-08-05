@@ -37,12 +37,16 @@
             this.TBNowPlayingArtist = new System.Windows.Forms.TextBox();
             this.LblNowPlayingAlbum = new System.Windows.Forms.Label();
             this.LblNowPlayingArtist = new System.Windows.Forms.Label();
+            this.PBNowPlaying = new System.Windows.Forms.PictureBox();
+            this.TBarProgress = new System.Windows.Forms.TrackBar();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.TabMusic = new System.Windows.Forms.TabPage();
             this.DGVMusicPlaylist = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TVMusic = new XBMC_Remote.MyTreeView();
             this.TabMovies = new System.Windows.Forms.TabPage();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.PBMoviesArt = new System.Windows.Forms.PictureBox();
             this.TBMoviesPlot = new System.Windows.Forms.TextBox();
             this.LblMoviesPlot = new System.Windows.Forms.Label();
             this.TBMoviesRuntime = new System.Windows.Forms.TextBox();
@@ -60,9 +64,13 @@
             this.DGVMovies = new System.Windows.Forms.DataGridView();
             this.ClmTitle = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TabTvShows = new System.Windows.Forms.TabPage();
+            this.TVTvShows = new XBMC_Remote.MyTreeView();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.PBTvShowsArt = new System.Windows.Forms.PictureBox();
             this.TBTvShowsPlot = new System.Windows.Forms.TextBox();
             this.TabFiles = new System.Windows.Forms.TabPage();
+            this.TabSystem = new System.Windows.Forms.TabPage();
+            this.BtnSettings = new System.Windows.Forms.Button();
             this.GBSystem = new System.Windows.Forms.GroupBox();
             this.TBUPT = new System.Windows.Forms.TextBox();
             this.LBLUpTime = new System.Windows.Forms.Label();
@@ -74,7 +82,6 @@
             this.TBFreeMemory = new System.Windows.Forms.TextBox();
             this.LBLFreeMemory = new System.Windows.Forms.Label();
             this.LBLFps = new System.Windows.Forms.Label();
-            this.TabSystem = new System.Windows.Forms.TabPage();
             this.GrpControls = new System.Windows.Forms.GroupBox();
             this.LblVolume = new System.Windows.Forms.Label();
             this.TBarVolume = new System.Windows.Forms.TrackBar();
@@ -85,30 +92,23 @@
             this.BTNSkipPrevious = new System.Windows.Forms.Button();
             this.BTNStop = new System.Windows.Forms.Button();
             this.BTNPlayPause = new System.Windows.Forms.Button();
-            this.PBMoviesArt = new System.Windows.Forms.PictureBox();
-            this.PBTvShowsArt = new System.Windows.Forms.PictureBox();
-            this.PBNowPlaying = new System.Windows.Forms.PictureBox();
-            this.BtnSettings = new System.Windows.Forms.Button();
-            this.TBarProgress = new System.Windows.Forms.TrackBar();
-            this.TVMusic = new XBMC_Remote.MyTreeView();
-            this.TVTvShows = new XBMC_Remote.MyTreeView();
             this.GBNowPlaying.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PBNowPlaying)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TBarProgress)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.TabMusic.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGVMusicPlaylist)).BeginInit();
             this.TabMovies.SuspendLayout();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PBMoviesArt)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGVMovies)).BeginInit();
             this.TabTvShows.SuspendLayout();
             this.panel2.SuspendLayout();
-            this.GBSystem.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PBTvShowsArt)).BeginInit();
             this.TabSystem.SuspendLayout();
+            this.GBSystem.SuspendLayout();
             this.GrpControls.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TBarVolume)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PBMoviesArt)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PBTvShowsArt)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PBNowPlaying)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.TBarProgress)).BeginInit();
             this.SuspendLayout();
             // 
             // GBNowPlaying
@@ -197,6 +197,28 @@
             this.LblNowPlayingArtist.TabIndex = 1;
             this.LblNowPlayingArtist.Text = "Artist:";
             // 
+            // PBNowPlaying
+            // 
+            this.PBNowPlaying.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.PBNowPlaying.Location = new System.Drawing.Point(8, 19);
+            this.PBNowPlaying.Margin = new System.Windows.Forms.Padding(4);
+            this.PBNowPlaying.Name = "PBNowPlaying";
+            this.PBNowPlaying.Size = new System.Drawing.Size(120, 104);
+            this.PBNowPlaying.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.PBNowPlaying.TabIndex = 0;
+            this.PBNowPlaying.TabStop = false;
+            // 
+            // TBarProgress
+            // 
+            this.TBarProgress.Location = new System.Drawing.Point(194, 121);
+            this.TBarProgress.Maximum = 100;
+            this.TBarProgress.Name = "TBarProgress";
+            this.TBarProgress.Size = new System.Drawing.Size(307, 45);
+            this.TBarProgress.TabIndex = 21;
+            this.TBarProgress.TickFrequency = 5;
+            this.TBarProgress.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.TBarProgress.ValueChanged += new System.EventHandler(this.TBarProgress_ValueChanged);
+            // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.TabMusic);
@@ -249,6 +271,14 @@
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
             this.dataGridViewTextBoxColumn2.ReadOnly = true;
             // 
+            // TVMusic
+            // 
+            this.TVMusic.Location = new System.Drawing.Point(0, 0);
+            this.TVMusic.Name = "TVMusic";
+            this.TVMusic.Size = new System.Drawing.Size(440, 401);
+            this.TVMusic.TabIndex = 0;
+            this.TVMusic.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.TVMusic_NodeMouseDoubleClick);
+            // 
             // TabMovies
             // 
             this.TabMovies.Controls.Add(this.panel1);
@@ -282,6 +312,15 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(424, 401);
             this.panel1.TabIndex = 1;
+            // 
+            // PBMoviesArt
+            // 
+            this.PBMoviesArt.Location = new System.Drawing.Point(291, 0);
+            this.PBMoviesArt.Name = "PBMoviesArt";
+            this.PBMoviesArt.Size = new System.Drawing.Size(133, 162);
+            this.PBMoviesArt.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.PBMoviesArt.TabIndex = 16;
+            this.PBMoviesArt.TabStop = false;
             // 
             // TBMoviesPlot
             // 
@@ -452,6 +491,15 @@
             this.TabTvShows.Text = "TV Shows";
             this.TabTvShows.UseVisualStyleBackColor = true;
             // 
+            // TVTvShows
+            // 
+            this.TVTvShows.Location = new System.Drawing.Point(0, 0);
+            this.TVTvShows.Name = "TVTvShows";
+            this.TVTvShows.Size = new System.Drawing.Size(440, 401);
+            this.TVTvShows.TabIndex = 3;
+            this.TVTvShows.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TVTvShows_AfterSelect);
+            this.TVTvShows.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.TVTvShows_NodeMouseDoubleClick);
+            // 
             // panel2
             // 
             this.panel2.Controls.Add(this.PBTvShowsArt);
@@ -460,6 +508,15 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(449, 401);
             this.panel2.TabIndex = 2;
+            // 
+            // PBTvShowsArt
+            // 
+            this.PBTvShowsArt.Location = new System.Drawing.Point(0, 0);
+            this.PBTvShowsArt.Name = "PBTvShowsArt";
+            this.PBTvShowsArt.Size = new System.Drawing.Size(449, 305);
+            this.PBTvShowsArt.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.PBTvShowsArt.TabIndex = 16;
+            this.PBTvShowsArt.TabStop = false;
             // 
             // TBTvShowsPlot
             // 
@@ -480,6 +537,27 @@
             this.TabFiles.TabIndex = 3;
             this.TabFiles.Text = "Shares";
             this.TabFiles.UseVisualStyleBackColor = true;
+            // 
+            // TabSystem
+            // 
+            this.TabSystem.Controls.Add(this.BtnSettings);
+            this.TabSystem.Controls.Add(this.GBSystem);
+            this.TabSystem.Location = new System.Drawing.Point(4, 23);
+            this.TabSystem.Name = "TabSystem";
+            this.TabSystem.Size = new System.Drawing.Size(895, 401);
+            this.TabSystem.TabIndex = 4;
+            this.TabSystem.Text = "System";
+            this.TabSystem.UseVisualStyleBackColor = true;
+            // 
+            // BtnSettings
+            // 
+            this.BtnSettings.Location = new System.Drawing.Point(15, 12);
+            this.BtnSettings.Name = "BtnSettings";
+            this.BtnSettings.Size = new System.Drawing.Size(75, 23);
+            this.BtnSettings.TabIndex = 3;
+            this.BtnSettings.Text = "Settings...";
+            this.BtnSettings.UseVisualStyleBackColor = true;
+            this.BtnSettings.Click += new System.EventHandler(this.BtnSettings_Click);
             // 
             // GBSystem
             // 
@@ -590,17 +668,6 @@
             this.LBLFps.TabIndex = 0;
             this.LBLFps.Text = "FPS:";
             // 
-            // TabSystem
-            // 
-            this.TabSystem.Controls.Add(this.BtnSettings);
-            this.TabSystem.Controls.Add(this.GBSystem);
-            this.TabSystem.Location = new System.Drawing.Point(4, 23);
-            this.TabSystem.Name = "TabSystem";
-            this.TabSystem.Size = new System.Drawing.Size(895, 401);
-            this.TabSystem.TabIndex = 4;
-            this.TabSystem.Text = "System";
-            this.TabSystem.UseVisualStyleBackColor = true;
-            // 
             // GrpControls
             // 
             this.GrpControls.Controls.Add(this.LblVolume);
@@ -646,6 +713,7 @@
             this.BTNRecord.Size = new System.Drawing.Size(48, 48);
             this.BTNRecord.TabIndex = 18;
             this.BTNRecord.UseVisualStyleBackColor = true;
+            this.BTNRecord.Click += new System.EventHandler(this.BTNRecord_Click);
             // 
             // BTNFastForward
             // 
@@ -655,6 +723,7 @@
             this.BTNFastForward.Size = new System.Drawing.Size(48, 48);
             this.BTNFastForward.TabIndex = 17;
             this.BTNFastForward.UseVisualStyleBackColor = true;
+            this.BTNFastForward.Click += new System.EventHandler(this.BTNFastForward_Click);
             // 
             // BTNRewind
             // 
@@ -664,6 +733,7 @@
             this.BTNRewind.Size = new System.Drawing.Size(48, 48);
             this.BTNRewind.TabIndex = 16;
             this.BTNRewind.UseVisualStyleBackColor = true;
+            this.BTNRewind.Click += new System.EventHandler(this.BTNRewind_Click);
             // 
             // BTNSkipNext
             // 
@@ -673,6 +743,7 @@
             this.BTNSkipNext.Size = new System.Drawing.Size(48, 48);
             this.BTNSkipNext.TabIndex = 15;
             this.BTNSkipNext.UseVisualStyleBackColor = true;
+            this.BTNSkipNext.Click += new System.EventHandler(this.BTNSkipNext_Click);
             // 
             // BTNSkipPrevious
             // 
@@ -682,6 +753,7 @@
             this.BTNSkipPrevious.Size = new System.Drawing.Size(48, 48);
             this.BTNSkipPrevious.TabIndex = 14;
             this.BTNSkipPrevious.UseVisualStyleBackColor = true;
+            this.BTNSkipPrevious.Click += new System.EventHandler(this.BTNSkipPrevious_Click);
             // 
             // BTNStop
             // 
@@ -691,6 +763,7 @@
             this.BTNStop.Size = new System.Drawing.Size(48, 48);
             this.BTNStop.TabIndex = 13;
             this.BTNStop.UseVisualStyleBackColor = true;
+            this.BTNStop.Click += new System.EventHandler(this.BTNStop_Click);
             // 
             // BTNPlayPause
             // 
@@ -700,73 +773,7 @@
             this.BTNPlayPause.Size = new System.Drawing.Size(48, 48);
             this.BTNPlayPause.TabIndex = 12;
             this.BTNPlayPause.UseVisualStyleBackColor = true;
-            // 
-            // PBMoviesArt
-            // 
-            this.PBMoviesArt.Location = new System.Drawing.Point(291, 0);
-            this.PBMoviesArt.Name = "PBMoviesArt";
-            this.PBMoviesArt.Size = new System.Drawing.Size(133, 162);
-            this.PBMoviesArt.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.PBMoviesArt.TabIndex = 16;
-            this.PBMoviesArt.TabStop = false;
-            // 
-            // PBTvShowsArt
-            // 
-            this.PBTvShowsArt.Location = new System.Drawing.Point(0, 0);
-            this.PBTvShowsArt.Name = "PBTvShowsArt";
-            this.PBTvShowsArt.Size = new System.Drawing.Size(449, 305);
-            this.PBTvShowsArt.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.PBTvShowsArt.TabIndex = 16;
-            this.PBTvShowsArt.TabStop = false;
-            // 
-            // PBNowPlaying
-            // 
-            this.PBNowPlaying.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.PBNowPlaying.Location = new System.Drawing.Point(8, 19);
-            this.PBNowPlaying.Margin = new System.Windows.Forms.Padding(4);
-            this.PBNowPlaying.Name = "PBNowPlaying";
-            this.PBNowPlaying.Size = new System.Drawing.Size(120, 104);
-            this.PBNowPlaying.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.PBNowPlaying.TabIndex = 0;
-            this.PBNowPlaying.TabStop = false;
-            // 
-            // BtnSettings
-            // 
-            this.BtnSettings.Location = new System.Drawing.Point(15, 12);
-            this.BtnSettings.Name = "BtnSettings";
-            this.BtnSettings.Size = new System.Drawing.Size(75, 23);
-            this.BtnSettings.TabIndex = 3;
-            this.BtnSettings.Text = "Settings...";
-            this.BtnSettings.UseVisualStyleBackColor = true;
-            this.BtnSettings.Click += new System.EventHandler(this.BtnSettings_Click);
-            // 
-            // TBarProgress
-            // 
-            this.TBarProgress.Location = new System.Drawing.Point(194, 121);
-            this.TBarProgress.Maximum = 100;
-            this.TBarProgress.Name = "TBarProgress";
-            this.TBarProgress.Size = new System.Drawing.Size(307, 45);
-            this.TBarProgress.TabIndex = 21;
-            this.TBarProgress.TickFrequency = 5;
-            this.TBarProgress.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.TBarProgress.ValueChanged += new System.EventHandler(this.TBarProgress_ValueChanged);
-            // 
-            // TVMusic
-            // 
-            this.TVMusic.Location = new System.Drawing.Point(0, 0);
-            this.TVMusic.Name = "TVMusic";
-            this.TVMusic.Size = new System.Drawing.Size(440, 401);
-            this.TVMusic.TabIndex = 0;
-            this.TVMusic.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.TVMusic_NodeMouseDoubleClick);
-            // 
-            // TVTvShows
-            // 
-            this.TVTvShows.Location = new System.Drawing.Point(0, 0);
-            this.TVTvShows.Name = "TVTvShows";
-            this.TVTvShows.Size = new System.Drawing.Size(440, 401);
-            this.TVTvShows.TabIndex = 3;
-            this.TVTvShows.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TVTvShows_AfterSelect);
-            this.TVTvShows.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.TVTvShows_NodeMouseDoubleClick);
+            this.BTNPlayPause.Click += new System.EventHandler(this.BTNPlayPause_Click);
             // 
             // MainView
             // 
@@ -785,26 +792,26 @@
             this.Load += new System.EventHandler(this.MainView_Load);
             this.GBNowPlaying.ResumeLayout(false);
             this.GBNowPlaying.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PBNowPlaying)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TBarProgress)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.TabMusic.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.DGVMusicPlaylist)).EndInit();
             this.TabMovies.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PBMoviesArt)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGVMovies)).EndInit();
             this.TabTvShows.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PBTvShowsArt)).EndInit();
+            this.TabSystem.ResumeLayout(false);
             this.GBSystem.ResumeLayout(false);
             this.GBSystem.PerformLayout();
-            this.TabSystem.ResumeLayout(false);
             this.GrpControls.ResumeLayout(false);
             this.GrpControls.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TBarVolume)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PBMoviesArt)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PBTvShowsArt)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PBNowPlaying)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.TBarProgress)).EndInit();
             this.ResumeLayout(false);
 
         }
