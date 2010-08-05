@@ -267,7 +267,10 @@ namespace XBMC_Remote
         private void BTNStop_Click(object sender, EventArgs e)
         {
             if (Xbmc.Player.IsAudioPlayerActive())
+            {
                 Xbmc.AudioPlayer.Stop();
+                DGVMusicPlaylist.Rows.Clear();
+            }
 
             if (Xbmc.Player.IsVideoPlayerActive())
                 Xbmc.VideoPlayer.Stop();
@@ -311,7 +314,8 @@ namespace XBMC_Remote
 
         private void BTNRecord_Click(object sender, EventArgs e)
         {
-            Xbmc.AudioPlayer.Record();
+            if (Xbmc.Player.IsAudioPlayerActive())
+                Xbmc.AudioPlayer.Record();
         }
 
         private void TVMusic_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
